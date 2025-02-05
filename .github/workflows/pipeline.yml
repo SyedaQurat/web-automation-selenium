@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  selenium-test:
     runs-on: ubuntu-latest
 
     steps:
