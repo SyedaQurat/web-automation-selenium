@@ -7,6 +7,7 @@ Follow the steps:
 - Wait for selenium, testNG and other dependencies to install
 - Navigate to LoginTests class and click the green arrow
 <img width="521" alt="image" src="https://github.com/user-attachments/assets/a33e134d-a108-48e9-a143-77683b126a23" />
+
 - The test_successful_login should start running 
 
 
