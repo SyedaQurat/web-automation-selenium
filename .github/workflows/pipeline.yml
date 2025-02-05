@@ -16,15 +16,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '21'  # Adjust to your preferred Java version
-          distribution: ''
-
-      - name: Install Maven
-        uses: actions/setup-java@v2
-        with:
-          maven-version: '3.8.1'  # Optional: Set if you need a specific Maven version
           java-version: '21'
-          distribution: ''
+          distribution: 'temurin'
 
       - name: Build and run tests
         run: mvn clean test
