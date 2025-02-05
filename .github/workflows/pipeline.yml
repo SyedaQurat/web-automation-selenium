@@ -1,0 +1,36 @@
+name: Selenium Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'  # Adjust to your preferred Java version
+          distribution: ''
+
+      - name: Install Maven
+        uses: actions/setup-java@v2
+        with:
+          maven-version: '3.8.1'  # Optional: Set if you need a specific Maven version
+          java-version: '21'
+          distribution: ''
+
+      - name: Build and run tests
+        run: mvn clean test
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: testng-report
+          path: target/test-classes/testng-results.xml
