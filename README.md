@@ -1,6 +1,14 @@
 # web-automation-selenium
 ReizTech Home test for Selenium
 
+**How to run the test:**
+Follow the steps:
+- Clone the project in your local machine
+- Wait for selenium, testNG and other dependencies to install
+- Navigate to LoginTests class and click the green arrow
+<img width="521" alt="image" src="https://github.com/user-attachments/assets/a33e134d-a108-48e9-a143-77683b126a23" />
+- The test_successful_login should start running 
+
 
 **Class: WebDriverGenerator**
 
