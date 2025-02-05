@@ -19,11 +19,26 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Set up ChromeDriver (for Selenium)
+        run: |
+            # Install dependencies for running headless Chrome
+            sudo apt-get update
+            sudo apt-get install -y wget unzip
+          
+            # Download and install the latest version of ChromeDriver
+            LATEST=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+            wget https://chromedriver.storage.googleapis.com/${LATEST}/chromedriver_linux64.zip
+            unzip chromedriver_linux64.zip -d $HOME/.local/bin
+            chmod +x $HOME/.local/bin/chromedriver
+          
+            # Add chromedriver to the PATH
+            echo "$HOME/.local/bin" >> $GITHUB_PATH
+
       - name: Build and run tests
-        run: mvn clean test
+        run: mvn clean test -X  # Enable debug logging for Maven
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
           name: testng-report
-          path: target/test-classes/testng-results.xml
+          path: target/surefire-reports/testng-results.xml
