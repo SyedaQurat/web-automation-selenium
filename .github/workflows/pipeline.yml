@@ -19,6 +19,13 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget curl gnupg
+          curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o google-chrome.deb
+          sudo apt install -y ./google-chrome.deb
+
       - name: Install dependencies for headless Chrome
         run: |
           sudo apt-get update
@@ -41,29 +48,33 @@ jobs:
 
       - name: Set up ChromeDriver (for Selenium)
         run: |
-          # Install dependencies for running headless Chrome
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-
           # Create the directory for ChromeDriver
           mkdir -p $HOME/.local/bin
-
-          # Download and install the latest version of ChromeDriver
+          
+          # Fetch the latest ChromeDriver version
           LATEST=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          if [ -z "$LATEST" ]; then
+            echo "Failed to fetch the latest chromedriver version."
+            exit 1
+          fi
+          echo "Latest ChromeDriver version: $LATEST"
+          
+          # Download and install the latest version of ChromeDriver
           wget https://chromedriver.storage.googleapis.com/${LATEST}/chromedriver_linux64.zip
-
+          
           # Extract the chromedriver and move it to the correct location
           unzip chromedriver_linux64.zip -d $HOME/.local/bin
-
+          
           # Make the chromedriver executable
           chmod +x $HOME/.local/bin/chromedriver
-
+          
           # Add chromedriver to the PATH
+          export PATH=$HOME/.local/bin:$PATH
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       
 
       - name: Build and run tests
-        run: mvn clean test -X  # Enable debug logging for Maven
+        run: mvn clean test -X
 
       - name: Upload test report
         uses: actions/upload-artifact@v4

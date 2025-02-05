@@ -11,8 +11,12 @@ public class WebDriverGenerator {
     @BeforeClass
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
+        options.setBinary("/usr/bin/google-chrome");
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-debugging-port=9222");
+        options.addArguments("--disable-gpu");
         driver = new ChromeDriver();
     }
     public void navigateTo(String url) {
