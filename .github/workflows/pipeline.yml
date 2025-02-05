@@ -30,7 +30,7 @@ jobs:
         run: mvn clean test
 
       - name: Upload test report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: testng-report
           path: target/test-classes/testng-results.xml
