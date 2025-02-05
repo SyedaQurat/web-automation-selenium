@@ -18,6 +18,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+
       - name: Install dependencies for headless Chrome
         run: |
           sudo apt-get update
@@ -27,7 +28,7 @@ jobs:
           libgdk-pixbuf2.0-0 \
           libnss3 \
           libgdk-pixbuf2.0-0 \
-          libasound2 \
+          libasound2t64 \
           fonts-liberation \
           libatk-bridge2.0-0 \
           libatk1.0-0 \
