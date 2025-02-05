@@ -81,4 +81,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: testng-report
-          path: target/surefire-reports/testng-results.xml
+          path: target/surefire-reports/testng-results.html
